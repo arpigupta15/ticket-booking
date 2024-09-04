@@ -15,7 +15,7 @@ pipeline {
        stage('Deploy to Tomcat') {
       steps {
         
-         sh "sudo cp -S /var/lib/jenkins/workspace/Ticketbooking/target/TrainBook-1.0.0-SNAPSHOT.war /opt/tomcat/webapps/"
+         sh "cp -S /var/lib/jenkins/workspace/Ticketbooking/target/TrainBook-1.0.0-SNAPSHOT.war /opt/tomcat/webapps/"
       }
     }
   }
