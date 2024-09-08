@@ -12,12 +12,12 @@ pipeline {
         sh "mvn package"
       }
     }
-       stage('Deploy to Tomcat') {
-      steps {
-        
-         sh "sudo cp /var/lib/jenkins/workspace/Ticketbooking/target/TrainBook-1.0.0-SNAPSHOT.war /opt/tomcat/webapps/"
-      }
-    }
+    //   stage('Deploy to Tomcat') { 
+     //   steps {
+       
+      //     sh "sudo cp /var/lib/jenkins/workspace/Ticketbooking/target/TrainBook-1.0.0-SNAPSHOT.war /opt/tomcat/webapps/"
+     //   }
+  //    }
   }
   }
 
