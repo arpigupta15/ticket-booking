@@ -1,6 +1,12 @@
 pipeline {
    agent any
-
+environment { 
+   NAME = "ticketbooking"
+   VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
+   IMAGE = "${NAME}:${VERSION}"
+   IMAGE_REPO="durgagupta"
+   IMAGE_URL='hub.docker.com'
+   }
   stages {
     stage('Cloning Git') {
       steps {
@@ -12,12 +18,14 @@ pipeline {
         sh "mvn package"
       }
     }
-    //   stage('Deploy to Tomcat') { 
-     //   steps {
-       
-      //     sh "sudo cp /var/lib/jenkins/workspace/Ticketbooking/target/TrainBook-1.0.0-SNAPSHOT.war /opt/tomcat/webapps/"
-     //   }
-  //    }
+  
+stage('Docker Build result') {
+     steps {
+            echo "Running ${VERSION} on ${env.JENKINS_URL}"
+            sh "docker build -t ${NAME} ."
+            sh "docker tag ${NAME}:latest ${IMAGE_REPO}/${NAME}:${VERSION}"
+        }
+    }
   }
   }
 
