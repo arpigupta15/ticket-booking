@@ -26,6 +26,15 @@ stage('Docker Build result') {
             sh "docker tag ${NAME}:latest ${IMAGE_REPO}/${NAME}:${VERSION}"
         }
     }
+     stage('Push result image') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: 'dockeruser', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          sh "docker push ${IMAGE_REPO}/${NAME}:${VERSION}"
+           
+        }
+      }
+    }
   }
   }
 
